@@ -1,0 +1,20 @@
+version: '4.0'
+
+services:
+  mongodb:
+    container_name: mongo
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    volumes:
+      - ./src/main/resources/scripts:/docker-entrypoint-initdb.d
+    ports:
+      - "27017:27017"
+  job-service:
+    container_name: job-service
+    depends_on:
+      - mongodb
+    image: job-service-image:1.1
+    ports:
+      - "8090:8090"
