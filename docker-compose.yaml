@@ -18,3 +18,4 @@ services:
     image: job-service-image:1.1
     ports:
       - "8090:8090"
+    build: .
